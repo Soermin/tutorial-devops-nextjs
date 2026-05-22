@@ -78,7 +78,12 @@ async function runTutorialQuery<T>(
     return fallback;
   }
 
-  return query(getPrismaClient());
+  try {
+    return await query(getPrismaClient());
+  } catch (error) {
+    console.error("Tutorial query failed:", error);
+    return fallback;
+  }
 }
 
 export async function getLatestPublishedTutorials(

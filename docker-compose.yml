@@ -9,7 +9,8 @@ services:
       DATABASE_URL: postgresql://admin:password@postgres:5432/tutorialdb
       NEXT_PUBLIC_APP_NAME: Tutorial DevOps
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - tutorial-network
 
@@ -21,6 +22,13 @@ services:
       POSTGRES_DB: tutorialdb
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U admin -d tutorialdb']
+      interval: 5s
+      timeout: 5s
+      retries: 12
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
