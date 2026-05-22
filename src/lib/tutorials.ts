@@ -1,5 +1,9 @@
-import type { Prisma } from "@prisma/client";
-import { prisma } from "@/lib/prisma";
+import type { Prisma, PrismaClient } from "@prisma/client";
+import {
+  getPrismaClient,
+  hasDatabaseUrl,
+  warnMissingDatabaseUrl,
+} from "@/lib/prisma";
 
 const tutorialCardSelect = {
   id: true,
@@ -65,46 +69,66 @@ export type TutorialCategory = Prisma.CategoryGetPayload<{
   select: typeof categoryListSelect;
 }>;
 
+async function runTutorialQuery<T>(
+  fallback: T,
+  query: (prisma: PrismaClient) => Promise<T>,
+): Promise<T> {
+  if (!hasDatabaseUrl()) {
+    warnMissingDatabaseUrl();
+    return fallback;
+  }
+
+  return query(getPrismaClient());
+}
+
 export async function getLatestPublishedTutorials(
   limit = 4,
 ): Promise<TutorialCard[]> {
-  return prisma.tutorial.findMany({
-    where: {
-      published: true,
-    },
-    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
-    take: limit,
-    select: tutorialCardSelect,
-  });
+  return runTutorialQuery([], (prisma) =>
+    prisma.tutorial.findMany({
+      where: {
+        published: true,
+      },
+      orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+      take: limit,
+      select: tutorialCardSelect,
+    }),
+  );
 }
 
 export async function getPublishedTutorials(): Promise<TutorialCard[]> {
-  return prisma.tutorial.findMany({
-    where: {
-      published: true,
-    },
-    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
-    select: tutorialCardSelect,
-  });
+  return runTutorialQuery([], (prisma) =>
+    prisma.tutorial.findMany({
+      where: {
+        published: true,
+      },
+      orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+      select: tutorialCardSelect,
+    }),
+  );
 }
 
 export async function getPublishedTutorialBySlug(
   slug: string,
 ): Promise<null | TutorialDetail> {
-  return prisma.tutorial.findFirst({
-    where: {
-      slug,
-      published: true,
-    },
-    select: tutorialDetailSelect,
-  });
+  return runTutorialQuery(null, (prisma) =>
+    prisma.tutorial.findFirst({
+      where: {
+        slug,
+        published: true,
+      },
+      select: tutorialDetailSelect,
+    }),
+  );
 }
 
 export async function getTutorialCategories(): Promise<TutorialCategory[]> {
-  return prisma.category.findMany({
-    orderBy: {
-      name: "asc",
-    },
-    select: categoryListSelect,
-  });
+  return runTutorialQuery([], (prisma) =>
+    prisma.category.findMany({
+      orderBy: {
+        name: "asc",
+      },
+      select: categoryListSelect,
+    }),
+  );
 }
