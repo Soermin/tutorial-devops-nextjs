@@ -6,13 +6,30 @@ datasource db {
   provider = "postgresql"
 }
 
+model Category {
+  id          Int        @id @default(autoincrement())
+  name        String
+  slug        String     @unique
+  description String?
+  tutorials   Tutorial[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
 model Tutorial {
   id          Int      @id @default(autoincrement())
   title       String
   slug        String   @unique
-  description String?
+  description String
   content     String
-  category    String?
+  level       String
+  readTime    String
+  published   Boolean  @default(false)
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([published, createdAt])
 }
