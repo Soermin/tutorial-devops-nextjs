@@ -74,15 +74,24 @@ async function runTutorialQuery<T>(
   query: (prisma: PrismaClient) => Promise<T>,
 ): Promise<T> {
   if (!hasDatabaseUrl()) {
-    warnMissingDatabaseUrl();
-    return fallback;
+    if (process.env.npm_lifecycle_event === "build") {
+      warnMissingDatabaseUrl();
+      return fallback;
+    }
+
+    throw new Error("DATABASE_URL is not configured.");
   }
 
   try {
     return await query(getPrismaClient());
   } catch (error) {
     console.error("Tutorial query failed:", error);
-    return fallback;
+
+    if (process.env.npm_lifecycle_event === "build") {
+      return fallback;
+    }
+
+    throw error;
   }
 }
 

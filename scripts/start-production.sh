@@ -7,8 +7,17 @@ if [ -z "${DATABASE_URL:-}" ]; then
 fi
 
 echo "Applying Prisma schema..."
-until npx prisma db push --skip-generate; do
+attempt=1
+max_attempts=30
+
+until npx prisma db push; do
+  if [ "$attempt" -ge "$max_attempts" ]; then
+    echo "Failed to apply Prisma schema after ${max_attempts} attempts."
+    exit 1
+  fi
+
   echo "Database is not ready yet. Retrying in 2 seconds..."
+  attempt=$((attempt + 1))
   sleep 2
 done
 
