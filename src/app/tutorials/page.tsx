@@ -34,7 +34,7 @@ export default async function TutorialsPage() {
               <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-400/25 bg-slate-900/80 text-cyan-300">
                 <FiTerminal className="h-4 w-4" />
               </span>
-              <span>Tutorial Library</span>
+              <span>Pingnode</span>
             </Link>
 
             <Link
@@ -42,21 +42,20 @@ export default async function TutorialsPage() {
               className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 transition hover:text-cyan-200"
             >
               <FiArrowLeft className="h-4 w-4" />
-              Back to homepage
+              Kembali ke beranda
             </Link>
           </header>
 
           <section className="py-14 sm:py-20">
             <p className="text-sm font-medium tracking-[0.22em] text-cyan-300 uppercase">
-              Tutorials Library
+              Daftar tutorial
             </p>
             <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Browse tutorials shaped by the content you publish
+              Semua tutorial yang tersedia di Pingnode
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              Every published tutorial appears here with its category, level,
-              reading time, and description so the library stays aligned with
-              your actual content.
+              Temukan tutorial berdasarkan kategori, level, dan estimasi waktu
+              baca dalam satu halaman yang rapi dan mudah dijelajahi.
             </p>
           </section>
         </div>
@@ -103,7 +102,7 @@ export default async function TutorialsPage() {
                     href={`/tutorials/${tutorial.slug}`}
                     className="inline-flex items-center gap-2 text-sm font-medium text-cyan-300 transition hover:text-cyan-200"
                   >
-                    Open tutorial
+                    Buka tutorial
                     <FiArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -112,11 +111,11 @@ export default async function TutorialsPage() {
           ) : (
             <div className="rounded-[1.75rem] border border-dashed border-slate-700 bg-slate-900/50 p-6">
               <p className="text-xl font-semibold text-white">
-                No tutorials published yet
+                Belum ada tutorial yang diterbitkan
               </p>
               <p className="mt-3 text-sm leading-7 text-slate-400">
-                Add and publish tutorial records in PostgreSQL to populate this
-                page dynamically.
+                Tambahkan lalu terbitkan tutorial agar halaman ini terisi
+                secara otomatis.
               </p>
             </div>
           )}
@@ -129,10 +128,10 @@ export default async function TutorialsPage() {
             </span>
             <div>
               <p className="text-sm font-medium tracking-[0.2em] text-teal-300 uppercase">
-                Categories
+                Kategori
               </p>
               <p className="text-sm text-slate-400">
-                Seeded tutorial domains
+                Topik yang tersedia
               </p>
             </div>
           </div>
@@ -149,7 +148,7 @@ export default async function TutorialsPage() {
                       {category.name}
                     </p>
                     <p className="mt-2 text-sm leading-6 text-slate-400">
-                      {category.description ?? "Category description coming soon."}
+                      {category.description ?? "Deskripsi kategori akan ditambahkan nanti."}
                     </p>
                   </div>
                   <span className="rounded-full border border-slate-700 px-2.5 py-1 text-xs font-medium text-slate-300">
@@ -163,12 +162,11 @@ export default async function TutorialsPage() {
           <div className="mt-6 rounded-2xl border border-cyan-400/15 bg-cyan-400/10 p-4">
             <div className="flex items-center gap-2 text-sm font-medium text-cyan-200">
               <FiBookOpen className="h-4 w-4" />
-              Published tutorials
+              Tutorial terbit
             </div>
-            <p className="mt-2 text-sm leading-6 text-slate-300">
-              {tutorials.length} article{tutorials.length === 1 ? "" : "s"} ready
-              to explore from the database.
-            </p>
+              <p className="mt-2 text-sm leading-6 text-slate-300">
+                {tutorials.length} tutorial siap dijelajahi.
+              </p>
           </div>
         </aside>
       </section>

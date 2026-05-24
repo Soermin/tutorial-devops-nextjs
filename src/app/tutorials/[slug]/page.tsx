@@ -50,7 +50,7 @@ export default async function TutorialDetailPage({
               <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-400/25 bg-slate-900/80 text-cyan-300">
                 <FiTerminal className="h-4 w-4" />
               </span>
-              <span>Tutorial Library</span>
+              <span>Pingnode</span>
             </Link>
 
             <Link
@@ -58,7 +58,7 @@ export default async function TutorialDetailPage({
               className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 transition hover:text-cyan-200"
             >
               <FiArrowLeft className="h-4 w-4" />
-              Back to tutorials
+              Kembali ke daftar tutorial
             </Link>
           </header>
 
@@ -96,10 +96,10 @@ export default async function TutorialDetailPage({
             </span>
             <div>
               <p className="text-sm font-medium tracking-[0.2em] text-cyan-300 uppercase">
-                Tutorial Content
+                Isi tutorial
               </p>
               <p className="text-sm text-slate-400">
-                Stored and delivered from PostgreSQL through Prisma
+                Materi lengkap yang bisa langsung dipelajari
               </p>
             </div>
           </div>
@@ -118,26 +118,26 @@ export default async function TutorialDetailPage({
 
         <aside className="rounded-[1.75rem] border border-slate-800 bg-slate-900/70 p-6">
           <p className="text-sm font-medium tracking-[0.2em] text-teal-300 uppercase">
-            Tutorial Info
+            Informasi tutorial
           </p>
 
           <div className="mt-6 space-y-4">
             <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
               <p className="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">
-                Category
+                Kategori
               </p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {tutorial.category.name}
               </p>
               <p className="mt-2 text-sm leading-6 text-slate-400">
                 {tutorial.category.description ??
-                  "Category description is not available yet."}
+                  "Deskripsi kategori belum tersedia."}
               </p>
             </div>
 
             <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
               <p className="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">
-                Level
+                Tingkat
               </p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {tutorial.level}
@@ -146,7 +146,7 @@ export default async function TutorialDetailPage({
 
             <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
               <p className="text-xs font-medium tracking-[0.18em] text-slate-400 uppercase">
-                Reading time
+                Waktu baca
               </p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {tutorial.readTime}

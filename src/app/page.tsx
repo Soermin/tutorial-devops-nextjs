@@ -32,27 +32,27 @@ type HomepageSignal = {
 
 const homepageSignals: HomepageSignal[] = [
   {
-    title: "Publish and surface",
+    title: "Materi terbaru",
     description:
-      "Every tutorial you publish is ready to appear in the homepage feed without editing static sections.",
+      "Pengunjung bisa langsung menemukan tutorial terbaru tanpa harus mencari terlalu jauh.",
     icon: FiCompass,
   },
   {
-    title: "Categories stay visible",
+    title: "Kategori aktif",
     description:
-      "Category cards reflect the topics that already have published tutorials, keeping the homepage grounded in real content.",
+      "Kategori yang tampil di beranda hanya yang sudah memiliki isi, jadi tetap relevan untuk dibuka.",
     icon: FiLayers,
   },
   {
-    title: "Latest stays current",
+    title: "Navigasi cepat",
     description:
-      "The newest published entries rise to the top, so the homepage always points visitors to fresh material first.",
+      "Dari beranda, pembaca bisa langsung menuju tutorial unggulan, daftar lengkap, atau kategori pilihan.",
     icon: FiClock,
   },
 ];
 
 function formatTutorialCount(count: number) {
-  return `${count} tutorial${count === 1 ? "" : "s"}`;
+  return `${count} tutorial`;
 }
 
 export default async function Home() {
@@ -85,29 +85,29 @@ export default async function Home() {
 
   const summaryCards: SummaryCard[] = [
     {
-      label: "Published now",
+      label: "Tutorial terbit",
       value: String(totalTutorials),
       detail:
         totalTutorials > 0
-          ? "Entries already visible on the homepage"
-          : "Homepage is waiting for the first published tutorial",
+          ? "Sudah tampil dan siap dibaca"
+          : "Belum ada tutorial yang diterbitkan",
       icon: FiBookOpen,
     },
     {
-      label: "Active categories",
+      label: "Kategori aktif",
       value: String(activeCategories.length),
       detail:
         activeCategories.length > 0
-          ? "Categories with published material"
-          : "No category has published content yet",
+          ? "Kategori yang sudah memiliki isi"
+          : "Belum ada kategori dengan tutorial terbit",
       icon: FiFolder,
     },
     {
-      label: "Leading category",
-      value: featuredCategory?.name ?? "None yet",
+      label: "Kategori teratas",
+      value: featuredCategory?.name ?? "Belum ada",
       detail: featuredCategory
         ? formatTutorialCount(featuredCategory.tutorials.length)
-        : "Publish content to surface category trends",
+        : "Terbitkan tutorial untuk mulai membentuk kategori unggulan",
       icon: FiTrendingUp,
     },
   ];
@@ -127,28 +127,28 @@ export default async function Home() {
               <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-400/25 bg-slate-900/80 text-cyan-300 shadow-[0_0_35px_rgba(34,211,238,0.15)]">
                 <FiTerminal className="h-4 w-4" />
               </span>
-              <span>Tutorial Library</span>
+              <span>Pingnode</span>
             </Link>
 
             <div className="inline-flex items-center rounded-full border border-slate-800 bg-slate-900/70 px-4 py-2 text-xs font-medium tracking-[0.2em] text-slate-300 uppercase">
-              Content-led homepage
+              Pusat tutorial
             </div>
           </header>
 
           <section className="grid gap-12 pt-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-start lg:pt-20">
             <div className="max-w-3xl">
               <div className="inline-flex items-center rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-medium tracking-[0.24em] text-cyan-300 uppercase">
-                Built around the tutorials you publish
+                Belajar lewat praktik
               </div>
 
               <h1 className="mt-8 text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-                A homepage that follows your content, not a fixed topic pitch
+                Tutorial yang Anda publikasikan, tersusun rapi di Pingnode
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-                Published tutorials now shape the homepage directly. The newest
-                articles, active categories, and library signals update from the
-                content you add instead of relying on static showcase sections.
+                Pingnode menampilkan tutorial terbaru, kategori aktif, dan
+                sorotan materi secara otomatis agar pengunjung langsung
+                menemukan konten yang benar-benar tersedia.
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -156,13 +156,13 @@ export default async function Home() {
                   href="/tutorials"
                   className="inline-flex items-center justify-center rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
                 >
-                  Explore library
+                  Lihat semua tutorial
                 </Link>
                 <a
                   href="#categories"
                   className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900/80 px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-cyan-400/40 hover:text-cyan-200"
                 >
-                  Browse categories
+                  Jelajahi kategori
                 </a>
               </div>
 
@@ -195,16 +195,16 @@ export default async function Home() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm font-medium text-cyan-300">
-                    Library spotlight
+                    Sorotan utama
                   </p>
                   <h2 className="mt-2 text-2xl font-semibold text-white">
                     {highlightedTutorial
-                      ? "Freshly published tutorial"
-                      : "Waiting for the first published entry"}
+                      ? "Tutorial terbaru di Pingnode"
+                      : "Menunggu tutorial pertama"}
                   </h2>
                 </div>
                 <span className="rounded-full border border-teal-400/20 bg-teal-400/10 px-3 py-1 text-xs font-medium tracking-[0.2em] text-teal-300 uppercase">
-                  Auto-updated
+                  Terbaru
                 </span>
               </div>
 
@@ -231,12 +231,11 @@ export default async function Home() {
 
                   <div className="mt-8 rounded-3xl border border-slate-800 bg-slate-950/80 p-5">
                     <p className="text-xs font-medium tracking-[0.22em] text-slate-400 uppercase">
-                      Why it matters here
+                      Kenapa ini ditampilkan
                     </p>
                     <p className="mt-3 text-sm leading-7 text-slate-300">
-                      The homepage now highlights your newest published
-                      tutorial first, so visitors immediately land on content
-                      that actually exists in the library.
+                      Bagian ini menonjolkan tutorial paling baru agar
+                      pengunjung bisa langsung mulai dari materi terbaru Anda.
                     </p>
                   </div>
 
@@ -244,18 +243,18 @@ export default async function Home() {
                     href={`/tutorials/${highlightedTutorial.slug}`}
                     className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-cyan-300 transition hover:text-cyan-200"
                   >
-                    Read this tutorial
+                    Baca tutorial
                     <FiArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               ) : (
                 <div className="mt-8 rounded-3xl border border-dashed border-slate-700 bg-slate-950/60 p-5">
                   <p className="text-lg font-semibold text-white">
-                    No published tutorials yet
+                    Belum ada tutorial yang diterbitkan
                   </p>
                   <p className="mt-3 text-sm leading-7 text-slate-400">
-                    Once a tutorial is published, the homepage will start
-                    surfacing it here and in the sections below automatically.
+                    Setelah Anda menerbitkan tutorial pertama, Pingnode akan
+                    otomatis menampilkannya di bagian ini.
                   </p>
                 </div>
               )}
@@ -268,23 +267,23 @@ export default async function Home() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-medium tracking-[0.22em] text-cyan-300 uppercase">
-              Latest Tutorials
+              Tutorial terbaru
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">
-              The newest published entries lead the homepage
+              Mulai dari materi yang baru dipublikasikan
             </h2>
           </div>
 
           <div className="flex items-center gap-6">
             <p className="max-w-xl text-sm leading-7 text-slate-400 sm:text-base">
-              The feed below is pulled from published tutorial records and
-              sorted by the newest entries first.
+              Daftar ini diurutkan dari tutorial terbaru supaya pembaca cepat
+              menemukan materi yang baru Anda terbitkan.
             </p>
             <Link
               href="/tutorials"
               className="hidden text-sm font-medium text-cyan-300 transition hover:text-cyan-200 sm:inline-flex"
             >
-              View all tutorials
+              Lihat semua
             </Link>
           </div>
         </div>
@@ -334,7 +333,7 @@ export default async function Home() {
                     href={`/tutorials/${tutorial.slug}`}
                     className="inline-flex items-center gap-2 text-sm font-medium text-cyan-300 transition hover:text-cyan-200"
                   >
-                    Open tutorial
+                    Buka tutorial
                     <FiArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -343,11 +342,11 @@ export default async function Home() {
           ) : (
             <div className="rounded-[1.85rem] border border-dashed border-slate-700 bg-slate-900/50 p-6 md:col-span-2 xl:col-span-3">
               <p className="text-xl font-semibold text-white">
-                No published tutorials available yet
+                Belum ada tutorial terbaru
               </p>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400">
-                Publish your first tutorial and the homepage will start filling
-                this latest section automatically.
+                Terbitkan tutorial pertama Anda dan bagian ini akan terisi
+                secara otomatis.
               </p>
             </div>
           )}
@@ -361,16 +360,16 @@ export default async function Home() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-medium tracking-[0.22em] text-teal-300 uppercase">
-              Browse by Category
+              Jelajahi kategori
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">
-              Categories only show up when they have published content
+              Temukan topik yang sudah memiliki materi
             </h2>
           </div>
 
           <p className="max-w-xl text-sm leading-7 text-slate-400 sm:text-base">
-            This keeps the homepage aligned with your real library instead of
-            advertising empty sections that have nothing to open yet.
+            Hanya kategori yang sudah berisi tutorial yang tampil di sini,
+            jadi pengunjung tidak diarahkan ke bagian yang masih kosong.
           </p>
         </div>
 
@@ -396,18 +395,18 @@ export default async function Home() {
                   </h3>
                   <p className="mt-3 text-sm leading-7 text-slate-400">
                     {category.description ??
-                      "This category will expand as more tutorials are published."}
+                      "Kategori ini akan berkembang seiring bertambahnya tutorial yang Anda publikasikan."}
                   </p>
                 </article>
               ))
             ) : (
               <div className="rounded-[1.75rem] border border-dashed border-slate-700 bg-slate-900/50 p-6 md:col-span-2 xl:col-span-3">
                 <p className="text-xl font-semibold text-white">
-                  No active categories yet
+                  Belum ada kategori aktif
                 </p>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400">
-                  Categories will appear here after published tutorials start
-                  filling the library.
+                  Kategori akan muncul di sini setelah ada tutorial yang
+                  diterbitkan.
                 </p>
               </div>
             )}
@@ -415,10 +414,10 @@ export default async function Home() {
 
           <aside className="rounded-[1.9rem] border border-slate-800 bg-slate-900/70 p-6 lg:p-7">
             <p className="text-sm font-medium tracking-[0.22em] text-cyan-300 uppercase">
-              Library signals
+              Ringkasan
             </p>
             <h3 className="mt-3 text-2xl font-semibold text-white">
-              Why this homepage stays relevant
+              Mengapa Pingnode nyaman dijelajahi
             </h3>
 
             <div className="mt-8 space-y-4">
@@ -450,14 +449,12 @@ export default async function Home() {
 
             <div className="mt-8 rounded-3xl border border-cyan-400/15 bg-cyan-400/10 p-5">
               <p className="text-sm font-medium text-cyan-200">
-                Library snapshot
+                Gambaran cepat
               </p>
               <p className="mt-3 text-sm leading-7 text-slate-300">
                 {totalTutorials > 0
-                  ? `${formatTutorialCount(totalTutorials)} across ${activeCategories.length} active categor${
-                      activeCategories.length === 1 ? "y" : "ies"
-                    }.`
-                  : "Publish content to turn this homepage into a live tutorial hub."}
+                  ? `${formatTutorialCount(totalTutorials)} dalam ${activeCategories.length} kategori aktif.`
+                  : "Terbitkan tutorial untuk mulai membangun perpustakaan belajar di Pingnode."}
               </p>
             </div>
           </aside>
@@ -466,9 +463,9 @@ export default async function Home() {
 
       <footer className="border-t border-slate-800">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 py-8 text-sm text-slate-400 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-12">
-          <p className="font-medium text-slate-300">Tutorial Library</p>
+          <p className="font-medium text-slate-300">Pingnode</p>
           <p>
-            A content-first homepage that reflects the tutorials you publish.
+            Kumpulan tutorial yang rapi, ringan, dan siap dipelajari.
           </p>
         </div>
       </footer>
