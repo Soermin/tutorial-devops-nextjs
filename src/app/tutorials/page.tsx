@@ -34,7 +34,7 @@ export default async function TutorialsPage() {
               <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-400/25 bg-slate-900/80 text-cyan-300">
                 <FiTerminal className="h-4 w-4" />
               </span>
-              <span>IoT &amp; Cloud Engineering Notes</span>
+              <span>Tutorial Library</span>
             </Link>
 
             <Link
@@ -51,11 +51,12 @@ export default async function TutorialsPage() {
               Tutorials Library
             </p>
             <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Database-driven tutorials for IoT, Cloud, and DevOps learning
+              Browse tutorials shaped by the content you publish
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              Browse published tutorials organized by category, with practical
-              descriptions, learning level, and estimated reading time.
+              Every published tutorial appears here with its category, level,
+              reading time, and description so the library stays aligned with
+              your actual content.
             </p>
           </section>
         </div>

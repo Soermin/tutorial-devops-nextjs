@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "IoT & Cloud Engineering Notes",
+  title: "Tutorial Library",
   description:
-    "Practical tutorials for IoT systems, cloud infrastructure, monitoring, networking, and DevOps engineering.",
+    "A content-first tutorial library powered by published categories and tutorials.",
 };
 
 export default function RootLayout({

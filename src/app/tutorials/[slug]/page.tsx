@@ -50,7 +50,7 @@ export default async function TutorialDetailPage({
               <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-400/25 bg-slate-900/80 text-cyan-300">
                 <FiTerminal className="h-4 w-4" />
               </span>
-              <span>IoT &amp; Cloud Engineering Notes</span>
+              <span>Tutorial Library</span>
             </Link>
 
             <Link
