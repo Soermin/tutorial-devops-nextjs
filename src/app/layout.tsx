@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "Pingnode",
   description:
     "Pingnode adalah website tutorial yang menampilkan materi terbaru dan kategori aktif dalam satu tempat.",
+  icons: {
+    icon: "/Logo.png",
+    shortcut: "/Logo.png",
+    apple: "/Logo.png",
+  },
 };
 
 export default function RootLayout({

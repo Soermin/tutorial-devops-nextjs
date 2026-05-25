@@ -5,12 +5,12 @@ import {
   FiBookOpen,
   FiClock,
   FiFolder,
-  FiTerminal,
 } from "react-icons/fi";
 import {
   getPublishedTutorials,
   getTutorialCategories,
 } from "@/lib/tutorials";
+import { SiteLogo } from "@/components/site-logo";
 
 export const dynamic = "force-dynamic";
 
@@ -31,9 +31,7 @@ export default async function TutorialsPage() {
               href="/"
               className="flex items-center gap-3 text-sm font-medium tracking-[0.18em] text-slate-200 uppercase"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-400/25 bg-slate-900/80 text-cyan-300">
-                <FiTerminal className="h-4 w-4" />
-              </span>
+              <SiteLogo priority />
               <span>Pingnode</span>
             </Link>
 
