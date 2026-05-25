@@ -6,8 +6,10 @@ import {
   FiClock,
   FiFolder,
 } from "react-icons/fi";
+import { TutorialContentRenderer } from "@/components/tutorial-content-renderer";
 import { getPublishedTutorialBySlug } from "@/lib/tutorials";
 import { SiteLogo } from "@/components/site-logo";
+import { parseStoredTutorialBlocks } from "@/lib/tutorial-content";
 
 export const dynamic = "force-dynamic";
 
@@ -16,13 +18,6 @@ type TutorialDetailPageProps = {
     slug: string;
   }>;
 };
-
-function renderContent(content: string) {
-  return content
-    .split(/\n{2,}/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
-}
 
 export default async function TutorialDetailPage({
   params,
@@ -34,7 +29,10 @@ export default async function TutorialDetailPage({
     notFound();
   }
 
-  const contentBlocks = renderContent(tutorial.content);
+  const contentBlocks = parseStoredTutorialBlocks(
+    tutorial.contentBlocks,
+    tutorial.content,
+  );
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -82,6 +80,17 @@ export default async function TutorialDetailPage({
             <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
               {tutorial.description}
             </p>
+
+            {tutorial.coverImageUrl ? (
+              <div className="mt-10 overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950/80">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={tutorial.coverImageUrl}
+                  alt={tutorial.title}
+                  className="aspect-[16/8] w-full object-cover"
+                />
+              </div>
+            ) : null}
           </section>
         </div>
       </div>
@@ -102,15 +111,8 @@ export default async function TutorialDetailPage({
             </div>
           </div>
 
-          <div className="mt-8 space-y-6">
-            {contentBlocks.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="text-base leading-8 text-slate-300"
-              >
-                {paragraph}
-              </p>
-            ))}
+          <div className="mt-8">
+            <TutorialContentRenderer blocks={contentBlocks} />
           </div>
         </article>
 

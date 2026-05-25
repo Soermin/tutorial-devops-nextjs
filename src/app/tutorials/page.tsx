@@ -67,6 +67,17 @@ export default async function TutorialsPage() {
                 key={tutorial.slug}
                 className="rounded-[1.75rem] border border-slate-800 bg-slate-900/70 p-6 transition hover:border-cyan-400/25 hover:bg-slate-900"
               >
+                {tutorial.coverImageUrl ? (
+                  <div className="mb-5 overflow-hidden rounded-[1.5rem] border border-slate-800 bg-slate-950/80">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={tutorial.coverImageUrl}
+                      alt={tutorial.title}
+                      className="aspect-[16/9] w-full object-cover"
+                    />
+                  </div>
+                ) : null}
+
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <div className="flex flex-wrap items-center gap-2 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">

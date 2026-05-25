@@ -135,7 +135,18 @@ export default async function Home() {
 
               {highlightedTutorial ? (
                 <div className="mt-8">
-                  <div className="flex flex-wrap gap-2">
+                  {highlightedTutorial.coverImageUrl ? (
+                    <div className="overflow-hidden rounded-[1.85rem] border border-slate-800 bg-slate-950/80">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={highlightedTutorial.coverImageUrl}
+                        alt={highlightedTutorial.title}
+                        className="aspect-[16/10] w-full object-cover"
+                      />
+                    </div>
+                  ) : null}
+
+                  <div className="mt-5 flex flex-wrap gap-2">
                     <span className="inline-flex items-center rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-200">{highlightedTutorial.category.name}</span>
                     <span className="inline-flex items-center rounded-full border border-slate-700 bg-slate-950/80 px-3 py-1 text-xs font-medium text-slate-300">{highlightedTutorial.level}</span>
                     <span className="inline-flex items-center rounded-full border border-slate-700 bg-slate-950/80 px-3 py-1 text-xs font-medium text-slate-300">{highlightedTutorial.readTime}</span>
@@ -184,6 +195,17 @@ export default async function Home() {
           {latestTutorials.length > 0 ? (
             latestTutorials.map((tutorial, index) => (
               <article key={tutorial.slug} className="group rounded-[1.85rem] border border-slate-800 bg-slate-900/70 p-6 transition hover:border-cyan-400/30 hover:bg-slate-900">
+                {tutorial.coverImageUrl ? (
+                  <div className="mb-5 overflow-hidden rounded-[1.6rem] border border-slate-800 bg-slate-950/80">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={tutorial.coverImageUrl}
+                      alt={tutorial.title}
+                      className="aspect-[16/10] w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                ) : null}
+
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-slate-700 bg-slate-950 text-sm font-semibold text-cyan-300">{String(index + 1).padStart(2, '0')}</div>
 

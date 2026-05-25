@@ -22,6 +22,8 @@ model Tutorial {
   slug        String   @unique
   description String
   content     String
+  contentBlocks String?
+  coverImageUrl String?
   level       String
   readTime    String
   published   Boolean  @default(false)

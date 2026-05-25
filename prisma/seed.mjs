@@ -107,6 +107,21 @@ When finished, you will have a monitoring baseline that can grow into alerting, 
   },
 ];
 
+function paragraphsToContentBlocks(content) {
+  return JSON.stringify(
+    content
+      .split(/\n{2,}/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean)
+      .map((paragraph, index) => ({
+        id: `seed-block-${index + 1}`,
+        type: "paragraph",
+        text: paragraph,
+        meta: "",
+      })),
+  );
+}
+
 async function main() {
   for (const category of categories) {
     await prisma.category.upsert({
@@ -144,6 +159,8 @@ async function main() {
       slug: tutorial.slug,
       description: tutorial.description,
       content: tutorial.content,
+      contentBlocks: paragraphsToContentBlocks(tutorial.content),
+      coverImageUrl: null,
       level: tutorial.level,
       readTime: tutorial.readTime,
       published: tutorial.published,
