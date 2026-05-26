@@ -1,7 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 import { loginAdminAction } from "@/app/admin/actions";
 import {
   initialAdminActionState,
@@ -10,17 +9,10 @@ import {
 import { FormSubmitButton } from "@/components/form-submit-button";
 
 export function AdminLoginForm() {
-  const router = useRouter();
   const [state, formAction] = useActionState<
     AdminActionState,
     FormData
   >(loginAdminAction, initialAdminActionState);
-
-  useEffect(() => {
-    if (state.status === "success" && state.redirectTo) {
-      router.replace(state.redirectTo);
-    }
-  }, [router, state.redirectTo, state.status]);
 
   return (
     <form action={formAction} className="space-y-5">

@@ -210,8 +210,7 @@ export async function loginAdminAction(
   }
 
   await createAdminSession();
-
-  return successState("Login berhasil.", "/admin");
+  redirect("/admin");
 }
 
 export async function logoutAdminAction() {
