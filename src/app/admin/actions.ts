@@ -79,17 +79,6 @@ function invalidState(message: string): AdminActionState {
   };
 }
 
-function successState(
-  message: string,
-  redirectTo?: string,
-): AdminActionState {
-  return {
-    message,
-    redirectTo,
-    status: "success",
-  };
-}
-
 async function parseTutorialPayload(
   formData: FormData,
 ): Promise<TutorialPayloadResult> {
@@ -255,10 +244,7 @@ export async function createTutorialAction(
 
   await revalidateTutorialPaths(tutorial.slug);
 
-  return successState(
-    "Tutorial baru berhasil dibuat.",
-    `/admin/tutorials/${tutorial.id}/edit?created=1`,
-  );
+  redirect(`/admin/tutorials/${tutorial.id}/edit?created=1`);
 }
 
 export async function updateTutorialAction(
@@ -317,10 +303,7 @@ export async function updateTutorialAction(
   await revalidateTutorialPaths(updatedTutorial.slug, tutorial.slug);
   revalidatePath(`/admin/tutorials/${tutorialId}/edit`);
 
-  return successState(
-    "Perubahan tutorial berhasil disimpan.",
-    `/admin/tutorials/${tutorialId}/edit?saved=1`,
-  );
+  redirect(`/admin/tutorials/${tutorialId}/edit?saved=1`);
 }
 
 export async function toggleTutorialPublishAction(formData: FormData) {

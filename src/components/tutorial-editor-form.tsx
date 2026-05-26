@@ -1,7 +1,6 @@
 "use client";
 
 import { useActionState, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { FiArrowDown, FiArrowUp, FiImage, FiPlus, FiTrash2 } from "react-icons/fi";
 import {
   createTutorialBlock,
@@ -67,7 +66,6 @@ export function TutorialEditorForm({
   initialData,
   mode,
 }: TutorialEditorFormProps) {
-  const router = useRouter();
   const [state, formAction] = useActionState<
     AdminActionState,
     FormData
@@ -104,13 +102,6 @@ export function TutorialEditorForm({
       setSlug(createSlug(title));
     }
   }, [slugTouched, title]);
-
-  useEffect(() => {
-    if (state.status === "success" && state.redirectTo) {
-      router.replace(state.redirectTo);
-      router.refresh();
-    }
-  }, [router, state.redirectTo, state.status]);
 
   const previewCoverUrl = coverFilePreviewUrl || coverImageUrl || null;
   const previewBlocks = blocks.filter(hasVisibleBlockContent);

@@ -1,7 +1,6 @@
 export type AdminActionState = {
   message: string;
-  redirectTo?: string;
-  status: "error" | "idle" | "success";
+  status: "error" | "idle";
 };
 
 export const initialAdminActionState: AdminActionState = {
